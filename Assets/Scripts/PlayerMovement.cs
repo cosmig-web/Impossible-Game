@@ -13,24 +13,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position += new Vector3(0, 0, speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.position += new Vector3(0, 0, -speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
-        }
+        var x = Input.GetAxisRaw("Horizontal");
+        var z = Input.GetAxisRaw("Vertical");
 
-        print(Time.deltaTime);
+     transform.position += new Vector3(x, 0, z).normalized * speed * Time.deltaTime;
+    }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            print("You ded");
+        }
     }
 }
