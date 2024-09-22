@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 1;
+    public Vector3 startPos;
 
     void Start()
     {
-        
+        startPos = transform.position;
     }
 
     void Update()
@@ -23,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            print("You ded");
+            transform.position = startPos;
         }
     }
 }
