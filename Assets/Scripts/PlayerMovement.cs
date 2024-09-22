@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 1;
+    public float speed = 6.5f;
     public Vector3 startPos;
+    private AudioSource audioSource;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         startPos = transform.position;
     }
 
@@ -24,7 +27,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            transform.position = startPos;
+            audioSource.Play();
+
+            Invoke("ReloadScene", 10);
         }
+    }
+
+    void ReloadScene()
+    {
+        var SceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(SceneName);
     }
 }

@@ -12,7 +12,9 @@ public class FollowPath : MonoBehaviour
 
     private int currentPoint = 0;
 
-    private bool reverse = false;
+    public bool loop = true;
+
+    private int indexer = 0;
 
     private void Start()
     {
@@ -23,28 +25,14 @@ public class FollowPath : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, target) < 0.3f)
         {
-            /*if (currentPoint > path.Count)
+            indexer++;
+            if (indexer >= path.Count)
             {
-                currentPoint = 0;
-            }
-            */
-            if (reverse == false)
-            {
-                
-                if (currentPoint > path.Count)
+                indexer = 0;
+                if (!loop)
                 {
-                    reverse = true;
+                    path.Reverse();
                 }
-                target = path[++currentPoint];
-            }
-            if (reverse == true)
-            {
-                
-                if (currentPoint < 0)
-                {
-                    reverse = false;
-                }
-                target = path[--currentPoint];
             }
 
 
